@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BENTO PRO | NEXT-GEN INTERFACE</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           1. CSS VARIABLES (THEMING)
+           මෙතනින් ඔයාට මුළු වෙබ් එකේම ප්‍රධාන වර්ණ සහ Settings එකපාර වෙනස් කරන්න පුළුවන්.
+           ==========================================================================
+        */
+        :root {
+            --bg-main: #050505; /* තද කළු පැහැති පසුබිම */
+            --card-bg: #121212; /* Widget එකක පසුබිම */
+            --card-border: rgba(255, 255, 255, 0.08);
+            --accent-blue: #3b82f6; /* ප්‍රධාන නිල් පාට */
+            --accent-green: #10b981; /* Success/Online පාට */
+            --accent-purple: #8b5cf6; /* Special widget පාට */
+            --text-primary: #ffffff;
+            --text-secondary: #a1a1aa;
+            --font-main: 'Plus Jakarta Sans', sans-serif;
+            --radius-lg: 24px; /* ලොකු රවුම් කොන් */
+            --radius-md: 16px;
+            --shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.5);
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* ==========================================================================
+           2. GLOBAL RESET
+           ==========================================================================
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* ==========================================================================
+           3. BENTO GRID LAYOUT
+           මෙන්න මෙතන තමයි මැජික් එක තියෙන්නේ. CSS Grid පාවිච්චි කරලා කුට්ටි ටික පිළිවෙලට හදනවා.
+           ==========================================================================
+        */
+        .bento-container {
+            display: grid;
+            width: 100%;
+            max-width: 1200px;
+            /* Grid එක Column 4 කට බෙදනවා */
+            grid-template-columns: repeat(4, 1fr);
+            /* පේළි වල උස ප්‍රමාණය ස්වයංක්‍රීයව හැදෙනවා */
+            grid-auto-rows: minmax(160px, auto);
+            gap: 20px;
+            animation: containerEntrance 1s ease-out;
+        }
+
+        /* Responsive - Tablet සහ Phone වලදී Grid එක වෙනස් වෙන හැටි */
+        @media (max-width: 1024px) {
+            .bento-container { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 600px) {
+            .bento-container { grid-template-columns: 1fr; }
+        }
+
+        /* ඇතුල්වීමේ Animation එක */
+        @keyframes containerEntrance {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ==========================================================================
+           4. GENERIC WIDGET STYLES (හැම කුට්ටියකටම පොදු Styles)
+           ==========================================================================
+        */
+        .widget {
+            background: var(--card-bg);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            position: relative;
+            overflow: hidden;
+            transition: var(--transition);
+            display: flex;
+            flex-direction: column;
+            box-shadow: var(--shadow-sm);
+        }
+
+        .widget:hover {
+            border-color: rgba(255, 255, 255, 0.2);
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.6);
+        }
+
+        .widget-title {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* ==========================================================================
+           5. SPECIFIC WIDGETS (විවිධ කුට්ටි වල හැඩය සහ ප්‍රමාණය)
+           ==========================================================================
+        */
+        
+        /* ප්‍රධාන Login Widget එක (මෙය Column 2 ක ඉඩක් ගනී) */
+        .login-widget {
+            grid-column: span 2;
+            grid-row: span 2;
+            background: linear-gradient(145deg, #121212 0%, #1a1a1a 100%);
+            justify-content: center;
+        }
+
+        /* Welcome Text */
+        .hero-text h1 {
+            font-size: 2.5rem;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 10px;
+            background: linear-gradient(to right, #fff, #666);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        /* Status Widget */
+        .status-widget {
+            grid-column: span 1;
+            background: rgba(16, 185, 129, 0.05);
+            border-color: rgba(16, 185, 129, 0.2);
+        }
+
+        /* Clock Widget */
+        .clock-widget {
+            grid-column: span 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        #digital-clock {
+            font-size: 2.2rem;
+            font-weight: 700;
+            color: var(--accent-blue);
+        }
+
+        /* ==========================================================================
+           6. FORM ELEMENTS (Professional Inputs)
+           ==========================================================================
+        */
+        .input-group {
+            margin-top: 25px;
+        }
+
+        .bento-input {
+            width: 100%;
+            padding: 16px 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid var(--card-border);
+            border-radius: var(--radius-md);
+            color: white;
+            font-family: inherit;
+            font-size: 1rem;
+            outline: none;
+            margin-bottom: 15px;
+            transition: var(--transition);
+        }
+
+        .bento-input:focus {
+            border-color: var(--accent-blue);
+            background: rgba(255, 255, 255, 0.08);
+            box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.15);
+        }
+
+        .bento-btn {
+            width: 100%;
+            padding: 16px;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: var(--radius-md);
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .bento-btn:hover {
+            filter: brightness(1.2);
+            transform: translateY(-2px);
+        }
+
+        /* ==========================================================================
+           7. SYSTEM LOGS WIDGET (Hacker feel)
+           ==========================================================================
+        */
+        .logs-widget {
+            grid-column: span 2;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.75rem;
+            color: var(--accent-green);
+            background: #000;
+        }
+
+        .log-line { margin-bottom: 4px; opacity: 0.8; }
+        .log-time { color: #555; margin-right: 8px; }
+
+        /* ==========================================================================
+           8. DECORATIVE ELEMENTS
+           ==========================================================================
+        */
+        .pulse {
+            width: 8px; height: 8px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: inline-block;
+            box-shadow: 0 0 10px var(--accent-green);
+            animation: pulse-animation 2s infinite;
+        }
+
+        @keyframes pulse-animation {
+            0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+            70% { transform: scale(1); box-shadow: 0 0 0 10px rgba(16, 185, 129, 0); }
+            100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="bento-container">
+        
+        <div class="widget login-widget">
+            <div class="hero-text">
+                <h1>CORE<br>INTERFACE</h1>
+                <p style="color: var(--text-secondary);">Secure authentication for SH4LU_Z Engine.</p>
+            </div>
+            
+            <div class="input-group">
+                <input type="text" class="bento-input" placeholder="Operator Access Code">
+                <input type="password" class="bento-input" placeholder="Security Key">
+                <button class="bento-btn" onclick="simulateLogin()">
+                    INITIALIZE SYSTEM <i class="fa-solid fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+
+        <div class="widget status-widget">
+            <div class="widget-title"><i class="fa-solid fa-server"></i> Server Status</div>
+            <div style="font-size: 1.5rem; font-weight: 700; margin-bottom: 5px;">ONLINE</div>
+            <div style="font-size: 0.8rem; color: var(--text-secondary);">
+                <span class="pulse"></span> All systems operational
+            </div>
+            <div style="margin-top: auto; font-size: 0.7rem; color: #555;">Uptime: 428h 12m</div>
+        </div>
+
+        <div class="widget clock-widget">
+            <div class="widget-title"><i class="fa-regular fa-clock"></i> Local Time</div>
+            <div id="digital-clock">00:00:00</div>
+            <div id="date-display" style="font-size: 0.8rem; color: var(--text-secondary); margin-top: 5px;">Loading Date...</div>
+        </div>
+
+        <div class="widget" style="background: rgba(139, 92, 246, 0.1); border-color: rgba(139, 92, 246, 0.2);">
+            <div class="widget-title"><i class="fa-solid fa-bolt"></i> Quick Deploy</div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <button style="background: rgba(255,255,255,0.05); border: none; padding: 15px; border-radius: 12px; color: white; cursor: pointer;"><i class="fa-brands fa-whatsapp"></i></button>
+                <button style="background: rgba(255,255,255,0.05); border: none; padding: 15px; border-radius: 12px; color: white; cursor: pointer;"><i class="fa-solid fa-terminal"></i></button>
+            </div>
+        </div>
+
+        <div class="widget logs-widget">
+            <div class="widget-title" style="color: #444;"><i class="fa-solid fa-code"></i> Live System Logs</div>
+            <div id="log-container">
+                <div class="log-line"><span class="log-time">[00:01]</span> Kernel initialized successfully.</div>
+                <div class="log-line"><span class="log-time">[00:02]</span> Loading JARVIS core modules...</div>
+                <div class="log-line"><span class="log-time">[00:03]</span> Connecting to WhatsApp MD server...</div>
+                <div class="log-line"><span class="log-time">[00:05]</span> Firewall rules updated.</div>
+            </div>
+        </div>
+
+        <div class="widget" style="grid-column: span 1;">
+            <div class="widget-title"><i class="fa-solid fa-cloud-sun"></i> Location</div>
+            <div style="font-size: 1.2rem; font-weight: 600;">Tangalle, LK</div>
+            <div style="font-size: 2rem; font-weight: 800; margin-top: 10px;">28°C</div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. Clock Update Function
+        function updateClock() {
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+            const seconds = String(now.getSeconds()).padStart(2, '0');
+            
+            document.getElementById('digital-clock').textContent = `${hours}:${minutes}:${seconds}`;
+            
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('date-display').textContent = now.toLocaleDateString(undefined, options);
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // 2. Simulated System Logs (අලුතින් පේළි එකතු වීම)
+        function addLog() {
+            const container = document.getElementById('log-container');
+            const logs = [
+                "New connection detected from 192.168.1.5",
+                "Optimizing memory buffers...",
+                "Scanning for vulnerability patches...",
+                "API Request: GET /v1/status successful.",
+                "Database backup completed."
+            ];
+            
+            const randomLog = logs[Math.floor(Math.random() * logs.length)];
+            const time = new Date().toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+            
+            const div = document.createElement('div');
+            div.className = 'log-line';
+            div.innerHTML = `<span class="log-time">[${time}]</span> ${randomLog}`;
+            
+            container.appendChild(div);
+            if(container.children.length > 6) container.removeChild(container.children[1]);
+        }
+        setInterval(addLog, 4000);
+
+        // 3. Login Simulation
+        function simulateLogin() {
+            const btn = document.querySelector('.bento-btn');
+            btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> AUTHORIZING...';
+            btn.style.opacity = '0.6';
+            
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> ACCESS GRANTED';
+                btn.style.background = '#10b981';
+                alert("Welcome, SH4LU_Z. System is now under your control.");
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
