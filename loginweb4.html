@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NEUMORPHIC PRO | SH4LU_Z ECOSYSTEM</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           2. CSS VARIABLES & THEMING
+           මෙම වර්ණ සැකසුම් (Colors) මඟින් Neumorphic පෙනුම තීරණය වේ.
+           ==========================================================================
+        */
+        :root {
+            --bg-color: #e0e5ec; /* ප්‍රධාන පසුබිම් වර්ණය (Soft Grey) */
+            --light-shadow: #ffffff; /* ආලෝකය වැටෙන පැත්ත */
+            --dark-shadow: #a3b1c6;  /* සෙවනැල්ල වැටෙන පැත්ත */
+            --primary-accent: #6d5dfc; /* බොත්තම් සඳහා වර්ණය */
+            --text-main: #4a5568;
+            --text-light: #718096;
+            --success: #48bb78;
+            --radius: 30px;
+            
+            /* Neumorphic Shadows (භාවිතා කිරීමට පහසු ලෙස Variables ලෙස) */
+            --nm-out: 9px 9px 16px var(--dark-shadow), -9px -9px 16px var(--light-shadow);
+            --nm-in: inset 6px 6px 10px var(--dark-shadow), inset -6px -6px 10px var(--light-shadow);
+        }
+
+        /* ==========================================================================
+           3. GLOBAL RESET & BASE STYLES
+           ==========================================================================
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Inter', sans-serif;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        /* ==========================================================================
+           4. LAYOUT STRUCTURE
+           ==========================================================================
+        */
+        .main-wrapper {
+            display: flex;
+            gap: 50px;
+            max-width: 1100px;
+            width: 100%;
+            align-items: flex-start;
+        }
+
+        /* Mobile එකේදී පිළිවෙලට පෙන්වීම */
+        @media (max-width: 900px) {
+            .main-wrapper { flex-direction: column; align-items: center; }
+            .side-panel { width: 100% !important; order: 2; }
+            .auth-panel { width: 100% !important; order: 1; }
+        }
+
+        /* ==========================================================================
+           5. NEUMORPHIC COMPONENTS (CARDS, INPUTS, BUTTONS)
+           ==========================================================================
+        */
+
+        /* ප්‍රධාන Card එක */
+        .nm-card {
+            background: var(--bg-color);
+            border-radius: var(--radius);
+            box-shadow: var(--nm-out);
+            padding: 40px;
+            transition: all 0.3s ease;
+        }
+
+        .auth-panel { width: 450px; }
+        .side-panel { width: 550px; }
+
+        /* Titles */
+        .title-section h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            color: var(--text-main);
+        }
+
+        .title-section p {
+            color: var(--text-light);
+            font-size: 1rem;
+            margin-bottom: 30px;
+        }
+
+        /* Input Styles */
+        .input-group {
+            margin-bottom: 25px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            color: var(--text-light);
+            padding-left: 10px;
+        }
+
+        .nm-input {
+            width: 100%;
+            border: none;
+            padding: 18px 25px;
+            border-radius: 15px;
+            background: var(--bg-color);
+            box-shadow: var(--nm-in); /* ඇතුළට ගිලුණු පෙනුම */
+            font-size: 1rem;
+            color: var(--text-main);
+            transition: all 0.3s ease;
+        }
+
+        /* Button Styles */
+        .nm-btn {
+            width: 100%;
+            padding: 18px;
+            border-radius: 15px;
+            border: none;
+            background: var(--bg-color);
+            box-shadow: var(--nm-out);
+            font-weight: 700;
+            font-size: 1rem;
+            color: var(--primary-accent);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+        }
+
+        .nm-btn:active {
+            box-shadow: var(--nm-in); /* එබූ විට ඇතුළට යාම */
+            transform: scale(0.98);
+        }
+
+        .nm-btn.primary {
+            background: var(--primary-accent);
+            color: white;
+        }
+
+        .nm-btn.primary:active {
+            background: #5b4ef0;
+        }
+
+        /* ==========================================================================
+           6. SIDE WIDGETS (SYSTEM METRICS)
+           ඔයාගේ JARVIS සහ WhatsApp Bot පද්ධති සඳහා ලස්සන Widgets.
+           ==========================================================================
+        */
+        .widget-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+        }
+
+        .metric-card {
+            padding: 25px;
+            text-align: center;
+        }
+
+        .metric-icon {
+            width: 50px;
+            height: 50px;
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            box-shadow: var(--nm-out);
+            color: var(--primary-accent);
+            font-size: 1.2rem;
+        }
+
+        .metric-value {
+            font-size: 1.5rem;
+            font-weight: 800;
+            margin-bottom: 5px;
+        }
+
+        .metric-label {
+            font-size: 0.8rem;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Progress Bar (Neumorphic Style) */
+        .progress-container {
+            width: 100%;
+            height: 12px;
+            background: var(--bg-color);
+            border-radius: 10px;
+            box-shadow: var(--nm-in);
+            margin-top: 15px;
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background: var(--primary-accent);
+            width: 0%;
+            border-radius: 10px;
+            transition: width 1s ease-in-out;
+        }
+
+        /* ==========================================================================
+           7. ANIMATIONS
+           ==========================================================================
+        */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .fade-in { animation: fadeIn 0.8s ease forwards; }
+
+    </style>
+</head>
+<body>
+
+    <div class="main-wrapper">
+        
+        <div class="nm-card auth-panel fade-in">
+            <div class="title-section">
+                <h1>Welcome Back</h1>
+                <p>Access the SH4LU_Z Control Suite</p>
+            </div>
+
+            <div class="input-group">
+                <label>Operator Identifier</label>
+                <input type="text" class="nm-input" placeholder="e.g. Admin_01">
+            </div>
+
+            <div class="input-group">
+                <label>Security Phrase</label>
+                <input type="password" class="nm-input" placeholder="••••••••">
+            </div>
+
+            <button class="nm-btn primary" onclick="handleAuth()">
+                <i class="fa-solid fa-fingerprint"></i> AUTHORIZE
+            </button>
+
+            <div style="margin-top: 30px; text-align: center;">
+                <p style="font-size: 0.8rem; color: var(--text-light);">System v4.2.0 | Secured by RSA-4096</p>
+            </div>
+        </div>
+
+        <div class="side-panel fade-in" style="animation-delay: 0.2s;">
+            <div class="nm-card" style="margin-bottom: 30px;">
+                <h3 style="margin-bottom: 20px; font-weight: 700;"><i class="fa-solid fa-microchip"></i> System Resources</h3>
+                <div class="widget-grid">
+                    <div class="nm-card metric-card" style="box-shadow: inset 2px 2px 5px var(--dark-shadow);">
+                        <div class="metric-icon"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="metric-value" id="cpu-val">0%</div>
+                        <div class="metric-label">JARVIS Load</div>
+                        <div class="progress-container"><div class="progress-bar" id="cpu-bar"></div></div>
+                    </div>
+                    <div class="nm-card metric-card" style="box-shadow: inset 2px 2px 5px var(--dark-shadow);">
+                        <div class="metric-icon"><i class="fa-solid fa-memory"></i></div>
+                        <div class="metric-value" id="mem-val">0%</div>
+                        <div class="metric-label">Bot Engine</div>
+                        <div class="progress-container"><div class="progress-bar" id="mem-bar" style="background: var(--success);"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="nm-card">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+                    <h3 style="font-weight: 700;"><i class="fa-brands fa-whatsapp"></i> WhatsApp MD</h3>
+                    <span style="padding: 5px 12px; background: var(--success); color: white; border-radius: 20px; font-size: 0.7rem; font-weight: 800;">CONNECTED</span>
+                </div>
+                <p style="font-size: 0.85rem; color: var(--text-light); line-height: 1.6;">
+                    Multi-device session active on Baileys Library. All plugins (News LK, Tool Installers) are operational.
+                </p>
+                <div style="display: flex; gap: 15px; margin-top: 20px;">
+                    <button class="nm-btn" style="flex: 1; font-size: 0.8rem;"><i class="fa-solid fa-rotate"></i> RESTART</button>
+                    <button class="nm-btn" style="flex: 1; font-size: 0.8rem; color: #ff5e5e;"><i class="fa-solid fa-power-off"></i> STOP</button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // 1. Simulate Resource Usage (Updating the Progress Bars)
+        function updateMetrics() {
+            const cpu = Math.floor(Math.random() * (60 - 20) + 20); // 20% - 60% අතර
+            const mem = Math.floor(Math.random() * (85 - 40) + 40); // 40% - 85% අතර
+
+            document.getElementById('cpu-val').innerText = cpu + "%";
+            document.getElementById('cpu-bar').style.width = cpu + "%";
+
+            document.getElementById('mem-val').innerText = mem + "%";
+            document.getElementById('mem-bar').style.width = mem + "%";
+        }
+
+        // තත්පර 3 කට වරක් Update කිරීම
+        setInterval(updateMetrics, 3000);
+        setTimeout(updateMetrics, 500); // Initial load
+
+        // 2. Authentication Handler
+        function handleAuth() {
+            const btn = document.querySelector('.nm-btn.primary');
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> SYNCING...';
+            
+            // සැබෑ ලොගින් එකක් සිදුවන බව පෙන්වීමට කුඩා ප්‍රමෝදයක් (Delay)
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check-double"></i> ACCESS GRANTED';
+                btn.style.background = '#48bb78';
+                
+                // ඇඩ්මින් කෙනෙක් සාදරයෙන් පිළිගැනීම
+                const title = document.querySelector('.title-section h1');
+                title.innerText = "System Online";
+                title.style.color = "#48bb78";
+            }, 2500);
+        }
+
+        // 3. Button Hover Sound Effect (Optional UI detail)
+        // මෙහිදී බොත්තම් මත මවුස් එක ගෙනිද්දී කුඩා සෙවනැලි වෙනසක් ඇති වේ.
+        const buttons = document.querySelectorAll('.nm-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('mouseenter', () => {
+                btn.style.boxShadow = '12px 12px 20px var(--dark-shadow), -12px -12px 20px var(--light-shadow)';
+            });
+            btn.addEventListener('mouseleave', () => {
+                btn.style.boxShadow = 'var(--nm-out)';
+            });
+        });
+
+    </script>
+</body>
+</html>

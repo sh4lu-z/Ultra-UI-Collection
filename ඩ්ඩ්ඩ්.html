@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH4LU_Z ENGINE ULTIMATE</title>
+    <link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&family=Orbitron:wght@500;900&family=Poppins:wght@300;500;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #020205;
+            color: white;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* --- 1. ICT NETWORK BACKGROUND --- */
+        #tech-canvas {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: 0;
+        }
+
+        /* --- 2. MAIN LAYOUT --- */
+        .main-wrapper {
+            display: flex;
+            width: 90%;
+            max-width: 1300px;
+            z-index: 10;
+            align-items: center;
+            justify-content: space-between;
+            gap: 40px;
+        }
+
+        /* --- LEFT SIDE: TEXT --- */
+        .text-section {
+            flex: 1;
+            padding-right: 20px;
+        }
+
+        /* The Main Title */
+        .hero-title {
+            font-family: 'Orbitron', sans-serif;
+            font-weight: 900;
+            font-size: 4.5rem;
+            line-height: 0.9;
+            text-transform: uppercase;
+            color: #fff;
+            text-shadow: 0 5px 15px rgba(0,0,0,0.5);
+            margin-bottom: 40px;
+            opacity: 0.8;
+        }
+
+        /* --- THE NEW 3D GLITCH SIGNATURE --- */
+        .signature-container {
+            position: relative;
+            margin-top: 20px;
+        }
+
+        .powered-small {
+            font-family: 'Orbitron', sans-serif;
+            font-size: 1rem;
+            letter-spacing: 5px;
+            color: #888;
+            margin-bottom: 5px;
+        }
+
+        .shalu-3d-text {
+            font-family: 'Black Ops One', cursive; /* Heavy Military/Stencil Font */
+            font-size: 4rem; /* HUGE SIZE */
+            color: #00ff41;
+            line-height: 1;
+            text-transform: uppercase;
+            position: relative;
+            
+            /* The 3D Layering Effect */
+            text-shadow: 
+                0 1px 0 #003300,
+                0 2px 0 #003300,
+                0 3px 0 #003300,
+                0 4px 0 #003300,
+                0 5px 0 #003300,
+                0 6px 0 #003300,
+                0 0 20px rgba(0, 255, 65, 0.8), /* Neon Glow */
+                0 0 40px rgba(0, 255, 65, 0.4);
+            
+            /* Glitch Animation Setup */
+            animation: glitch-skew 1s infinite linear alternate-reverse;
+        }
+
+        /* Creating the Glitch Duplicates */
+        .shalu-3d-text::before,
+        .shalu-3d-text::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #020205; /* Hide main text behind glitch */
+        }
+
+        .shalu-3d-text::before {
+            left: 2px;
+            text-shadow: -1px 0 #ff00c1; /* Pink offset */
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim 5s infinite linear alternate-reverse;
+        }
+
+        .shalu-3d-text::after {
+            left: -2px;
+            text-shadow: -1px 0 #00fff9; /* Cyan offset */
+            clip: rect(44px, 450px, 56px, 0);
+            animation: glitch-anim2 5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim {
+            0% { clip: rect(14px, 9999px, 127px, 0); transform: skew(0.5deg); }
+            5% { clip: rect(80px, 9999px, 2px, 0); transform: skew(0.5deg); }
+            10% { clip: rect(10px, 9999px, 13px, 0); transform: skew(0.5deg); }
+            15% { clip: rect(102px, 9999px, 86px, 0); transform: skew(0.5deg); }
+            20% { clip: rect(46px, 9999px, 10px, 0); transform: skew(0.5deg); }
+            100% { clip: rect(33px, 9999px, 7px, 0); transform: skew(0.5deg); }
+        }
+
+        @keyframes glitch-anim2 {
+            0% { clip: rect(109px, 9999px, 63px, 0); transform: skew(0.5deg); }
+            5% { clip: rect(3px, 9999px, 143px, 0); transform: skew(0.5deg); }
+            10% { clip: rect(59px, 9999px, 25px, 0); transform: skew(0.5deg); }
+            15% { clip: rect(39px, 9999px, 145px, 0); transform: skew(0.5deg); }
+            100% { clip: rect(81px, 9999px, 95px, 0); transform: skew(0.5deg); }
+        }
+
+        /* --- RIGHT SIDE: FORM --- */
+        .form-section { flex: 0 0 400px; }
+        .container {
+            background: rgba(10, 20, 30, 0.6);
+            backdrop-filter: blur(15px);
+            border: 1px solid #00ff41; /* Green Border */
+            border-radius: 10px;
+            padding: 30px;
+            box-shadow: 0 0 30px rgba(0, 255, 65, 0.1);
+        }
+
+        h2 { text-align: center; color: #00ff41; font-family: 'Orbitron', sans-serif; margin-bottom: 20px; }
+
+        .input-group { margin-bottom: 15px; position: relative; }
+        .input-group i { position: absolute; left: 15px; top: 50%; transform: translateY(-50%); color: #00ff41; }
+        input {
+            width: 100%; padding: 12px 15px 12px 40px; background: rgba(0,0,0,0.5);
+            border: 1px solid #333; color: #fff; border-radius: 5px; outline: none; transition: 0.3s;
+        }
+        input:focus { border-color: #00ff41; box-shadow: 0 0 10px rgba(0, 255, 65, 0.2); }
+
+        .toggle-group { display: flex; justify-content: space-between; margin-bottom: 10px; border-bottom: 1px solid #333; padding-bottom: 5px; }
+        .switch { position: relative; display: inline-block; width: 40px; height: 20px; }
+        .switch input { opacity: 0; width: 0; height: 0; }
+        .slider { position: absolute; cursor: pointer; top: 0; left: 0; right: 0; bottom: 0; background-color: #333; transition: .4s; border-radius: 20px; }
+        .slider:before { position: absolute; content: ""; height: 14px; width: 14px; left: 3px; bottom: 3px; background-color: white; transition: .4s; border-radius: 50%; }
+        input:checked + .slider { background-color: #00ff41; }
+        input:checked + .slider:before { transform: translateX(20px); }
+
+        .btn {
+            width: 100%; padding: 15px; background: #00ff41; color: #000;
+            border: none; font-weight: bold; font-family: 'Orbitron', sans-serif; cursor: pointer;
+            text-transform: uppercase; font-size: 1.1rem;
+            clip-path: polygon(10% 0, 100% 0, 100% 70%, 90% 100%, 0 100%, 0 30%); /* Sci-Fi Button Shape */
+            transition: 0.3s;
+        }
+        .btn:hover { background: #fff; text-shadow: 0 0 10px #00ff41; }
+
+        .step { display: none; animation: fadeIn 0.5s; }
+        .step.active { display: block; }
+        @keyframes fadeIn { from {opacity:0;} to {opacity:1;} }
+
+        /* --- NEW CUSTOMER SUPPORT BUTTON STYLE --- */
+        .support-box {
+            margin-top: 25px;
+            border-top: 1px dashed rgba(0,255,65,0.3);
+            padding-top: 15px;
+            text-align: center;
+        }
+
+        .support-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: rgba(0, 255, 65, 0.1);
+            border: 1px solid #00ff41;
+            padding: 10px 20px;
+            color: #00ff41;
+            text-decoration: none;
+            font-family: 'Orbitron', sans-serif;
+            font-size: 0.9rem;
+            border-radius: 5px;
+            transition: 0.3s;
+            letter-spacing: 1px;
+            width: 100%;
+        }
+
+        .support-btn:hover {
+            background: #00ff41;
+            color: black;
+            box-shadow: 0 0 15px #00ff41;
+        }
+
+        /* Responsive */
+        @media (max-width: 960px) {
+            .main-wrapper { flex-direction: column; text-align: center; margin-top: 50px; }
+            .hero-title { font-size: 3rem; }
+            .shalu-3d-text { font-size: 3rem; }
+            .form-section { width: 100%; max-width: 400px; margin-bottom: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="tech-canvas"></canvas>
+
+    <div class="main-wrapper">
+        <div class="text-section">
+            <div class="hero-title">
+                CREATE<br>YOUR OWN<br>BOT
+            </div>
+            
+            <div class="signature-container">
+                <div class="powered-small">/// SYSTEM POWERED BY</div>
+                <div class="shalu-3d-text" data-text="SH4LU_Z ENGINE">
+                    SH4LU_Z ENGINE
+                </div>
+            </div>
+        </div>
+
+        <div class="form-section">
+            <div class="container">
+                <div id="step1" class="step active">
+                    <h2>IDENTITY</h2>
+                    <div class="input-group"><i class="fa-solid fa-user-secret"></i><input type="text" id="userName" placeholder="Codename"></div>
+                    <div class="input-group"><i class="fa-solid fa-code"></i><input type="number" id="userAge" placeholder="Level/Age"></div>
+                    <div class="input-group"><i class="fa-solid fa-earth-asia"></i><input type="text" id="userCountry" placeholder="Server Region"></div>
+                    <button class="btn" onclick="next(2)">INITIALIZE</button>
+                </div>
+
+                <div id="step2" class="step">
+                    <h2>PROTOCOLS</h2>
+                    <div class="toggle-group"><label>Status View</label><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                    <div class="toggle-group"><label>Anti-Call</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <div class="toggle-group"><label>1 Time Saver</label><label class="switch"><input type="checkbox" checked><span class="slider"></span></label></div>
+                    <div class="toggle-group"><label>Ghost Mode</label><label class="switch"><input type="checkbox"><span class="slider"></span></label></div>
+                    <button class="btn" onclick="next(3)">COMPILE CONFIG</button>
+                </div>
+
+                <div id="step3" class="step">
+                    <h2>LINKING</h2>
+                    <div class="input-group"><i class="fa-solid fa-robot"></i><input type="text" id="botName" placeholder="Bot ID"></div>
+                    <div class="input-group"><i class="fa-brands fa-whatsapp"></i><input type="tel" id="userPhone" placeholder="+94 7X..."></div>
+                    <button class="btn" onclick="finish()">ESTABLISH UPLINK</button>
+                    <p id="msg" style="display:none; text-align:center; color:#00ff41; margin-top:15px; font-weight:bold;">// ACCESS GRANTED //</p>
+                </div>
+                
+                <div class="support-box">
+                    <a href="https://wa.me/94761358233" class="support-btn" target="_blank">
+                        <i class="fa-solid fa-headset"></i> CUSTOMER SUPPORT
+                    </a>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Form Script
+        function next(n) {
+            document.querySelector('.step.active').classList.remove('active');
+            document.getElementById('step'+n).classList.add('active');
+        }
+        function finish() {
+            const btn = document.querySelector('#step3 .btn');
+            btn.innerHTML = "SYNCING...";
+            setTimeout(() => { 
+                btn.style.display='none'; 
+                document.getElementById('msg').style.display='block'; 
+            }, 2000);
+        }
+
+        // Canvas Script (Same as before)
+        const canvas = document.getElementById('tech-canvas');
+        const ctx = canvas.getContext('2d');
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        let particles = [];
+        const particleCount = 100; // More dots
+
+        class Particle {
+            constructor(){
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.vx = (Math.random() - 0.5) * 1; 
+                this.vy = (Math.random() - 0.5) * 1; 
+                this.size = Math.random() * 2;
+            }
+            update(){
+                this.x += this.vx;
+                this.y += this.vy;
+                if(this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                if(this.y < 0 || this.y > canvas.height) this.vy *= -1;
+            }
+            draw(){
+                ctx.fillStyle = '#00ff41';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI*2);
+                ctx.fill();
+            }
+        }
+
+        function init(){
+            particles = [];
+            for(let i=0; i<particleCount; i++){
+                particles.push(new Particle());
+            }
+        }
+
+        function animate(){
+            ctx.fillStyle = 'rgba(2, 2, 5, 0.2)'; 
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+            
+            for(let i=0; i<particles.length; i++){
+                particles[i].update();
+                particles[i].draw();
+                
+                for(let j=i; j<particles.length; j++){
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx*dx + dy*dy);
+                    
+                    if(distance < 120){
+                        ctx.beginPath();
+                        ctx.strokeStyle = `rgba(0, 255, 65, ${1 - distance/120})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+            requestAnimationFrame(animate);
+        }
+
+        init();
+        animate();
+        
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+            init();
+        });
+    </script>
+</body>
+</html>

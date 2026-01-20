@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ghost Engine Connect</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body { background-color: #0c1317; font-family: 'Roboto', sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; margin: 0; color: #e9edef; }
+        .card { background: #202c33; padding: 40px; width: 100%; max-width: 400px; border-radius: 12px; box-shadow: 0 4px 20px rgba(0,0,0,0.3); text-align: center; border-bottom: 6px solid #00a884; }
+        .icon svg { width: 60px; height: 60px; fill: #00a884; margin-bottom: 20px; animation: pulse 2s infinite; }
+        h1 { font-size: 24px; margin-bottom: 10px; letter-spacing: 1px; }
+        .input-group { text-align: left; margin-bottom: 20px; }
+        label { font-size: 12px; font-weight: bold; color: #00a884; display: block; margin-bottom: 8px; margin-left: 5px; text-transform: uppercase; }
+        input { width: 100%; padding: 15px; border: 1px solid #2a3942; border-radius: 8px; font-size: 16px; outline: none; background: #111b21; color: white; box-sizing: border-box; }
+        input:focus { border-color: #00a884; }
+        button { width: 100%; padding: 15px; background: #00a884; color: #111b21; border: none; border-radius: 25px; font-weight: bold; cursor: pointer; font-size: 16px; text-transform: uppercase; margin-top: 10px; }
+        button:hover { background: #008f6f; }
+        .code-display { margin-top: 25px; display: none; background: #111b21; padding: 20px; border-radius: 8px; border: 1px dashed #00a884; }
+        .code-text { font-size: 32px; font-weight: bold; letter-spacing: 6px; color: #fff; }
+        .loader { display: none; margin: 15px auto; border: 3px solid #111b21; border-top: 3px solid #00a884; border-radius: 50%; width: 25px; height: 25px; animation: spin 1s linear infinite; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); } 100% { transform: scale(1); } }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <div class="icon"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12C2 17.52 6.48 22 12 22C17.52 22 22 17.52 22 12C22 6.48 17.52 2 12 2ZM10 17L5 12L6.41 10.59L10 14.17L17.59 6.58L19 8L10 17Z"></path></svg></div>
+        <h1>GHOST ENGINE</h1>
+        <p style="color:#8696a0; font-size:14px; margin-bottom:30px;">Initialize your personal WhatsApp Assistant.</p>
+
+        <div class="input-group">
+            <label>Bot Name</label>
+            <input type="text" id="name" placeholder="e.g. My Angel" />
+        </div>
+        <div class="input-group">
+            <label>Phone Number</label>
+            <input type="text" id="phone" placeholder="e.g. 947xxxxxxxx" />
+        </div>
+
+        <button onclick="startProcess()" id="btn-start">Connect</button>
+        <div class="loader" id="loader"></div>
+
+        <div class="code-display" id="result-area">
+            <div style="font-size:12px; color:#8696a0; margin-bottom:10px;">PAIRING CODE:</div>
+            <div class="code-text" id="code-text"></div>
+        </div>
+    </div>
+
+    <script>
+        async function startProcess() {
+            const phone = document.getElementById('phone').value;
+            const name = document.getElementById('name').value;
+            const btn = document.getElementById('btn-start');
+            const loader = document.getElementById('loader');
+            const resultArea = document.getElementById('result-area');
+            const codeText = document.getElementById('code-text');
+            
+            if (!phone || !name) return alert("Enter Name and Number!");
+
+            btn.disabled = true;
+            btn.style.opacity = "0.5";
+            loader.style.display = 'block';
+            resultArea.style.display = 'none';
+
+            try {
+                // 1. Start Session
+                await fetch(`/api/start?id=${phone}&name=${name}`);
+                
+                // 2. Wait 15 Seconds (Crucial for stability)
+                setTimeout(async () => {
+                    const res = await fetch(`/api/pair?id=${phone}`);
+                    const data = await res.json();
+                    
+                    loader.style.display = 'none';
+                    btn.disabled = false;
+                    btn.style.opacity = "1";
+
+                    if (data.code) {
+                        codeText.innerText = data.code;
+                        resultArea.style.display = 'block';
+                    } else {
+                        alert("Error: " + (data.error || "Failed"));
+                    }
+                }, 15000); // 15 Seconds Delay
+            } catch (error) {
+                alert("Connection Error!");
+                loader.style.display = 'none';
+                btn.disabled = false;
+                btn.style.opacity = "1";
+            }
+        }
+    </script>
+</body>
+</html>

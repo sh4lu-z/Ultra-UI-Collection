@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SH4LU_Z CORE | PREMIUM INTERFACE</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* =========================================
+           2. CSS VARIABLES (පාට සහ Styles මෙතනින් වෙනස් කරන්න)
+           ========================================= */
+        :root {
+            --primary-color: #6366f1; /* ලස්සන නිල්/දම් පාටක් */
+            --secondary-color: #a855f7;
+            --bg-dark: #0f172a;
+            --glass-white: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f8fafc;
+            --text-dim: #94a3b8;
+            --transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        /* =========================================
+           3. RESET & BASE STYLES
+           ========================================= */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-dark);
+            color: var(--text-main);
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* =========================================
+           4. ANIMATED MESH BACKGROUND (ලස්සන පසුබිම)
+           ========================================= */
+        .bg-blobs {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            filter: blur(80px);
+        }
+
+        .blob {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(40px);
+            z-index: -1;
+            animation: move 20s infinite alternate;
+        }
+
+        .blob-1 {
+            width: 400px;
+            height: 400px;
+            background: rgba(99, 102, 241, 0.2);
+            top: -100px;
+            left: -100px;
+        }
+
+        .blob-2 {
+            width: 500px;
+            height: 500px;
+            background: rgba(168, 85, 247, 0.15);
+            bottom: -150px;
+            right: -100px;
+            animation-delay: -5s;
+        }
+
+        @keyframes move {
+            from { transform: translate(0, 0) scale(1); }
+            to { transform: translate(100px, 50px) scale(1.1); }
+        }
+
+        /* =========================================
+           5. MAIN LOGIN CARD (වීදුරු පෙනුම තියෙන කොටස)
+           ========================================= */
+        .auth-card {
+            width: 450px;
+            background: var(--glass-white);
+            backdrop-filter: blur(20px) saturate(180%);
+            -webkit-backdrop-filter: blur(20px) saturate(180%);
+            border: 1px solid var(--glass-border);
+            border-radius: 24px;
+            padding: 50px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .brand-logo {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+
+        .brand-logo i {
+            font-size: 2.5rem;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .brand-logo h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .brand-logo p {
+            color: var(--text-dim);
+            font-size: 0.9rem;
+            margin-top: 5px;
+        }
+
+        /* =========================================
+           6. FORM INPUTS & BUTTONS
+           ========================================= */
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-dim);
+        }
+
+        .input-wrapper {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .input-wrapper i {
+            position: absolute;
+            left: 16px;
+            color: var(--text-dim);
+            font-size: 1.1rem;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px 16px 14px 48px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            outline: none;
+            transition: var(--transition);
+        }
+
+        input:focus {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+        }
+
+        .btn-submit {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            border-radius: 12px;
+            color: white;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: var(--transition);
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px -5px rgba(99, 102, 241, 0.4);
+            filter: brightness(1.1);
+        }
+
+        /* =========================================
+           7. EXTRA UI ELEMENTS (FOOTER)
+           ========================================= */
+        .footer-links {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+            font-size: 0.85rem;
+        }
+
+        .footer-links a {
+            color: var(--primary-color);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .copyright {
+            text-align: center;
+            margin-top: 40px;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="bg-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="auth-card">
+        <div class="brand-logo">
+            <i class="fa-solid fa-shield-halved"></i>
+            <h1>SH4LU_Z CORE</h1>
+            <p>Secure Enterprise Gateway</p>
+        </div>
+
+        <div id="loginForm">
+            <div class="form-group">
+                <label>IDENTIFICATION</label>
+                <div class="input-wrapper">
+                    <i class="fa-regular fa-envelope"></i>
+                    <input type="text" id="user" placeholder="Enter operator key or email">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>SECURITY PHRASE</label>
+                <div class="input-wrapper">
+                    <i class="fa-solid fa-lock"></i>
+                    <input type="password" id="pass" placeholder="••••••••">
+                </div>
+            </div>
+
+            <button class="btn-submit" onclick="handleLogin()">
+                AUTHENTICATE <i class="fa-solid fa-arrow-right"></i>
+            </button>
+
+            <div class="footer-links">
+                <a href="#">Need Help?</a>
+                <a href="#">System Status</a>
+            </div>
+        </div>
+
+        <div class="copyright">
+            &copy; 2026 SH4LU_Z PROJECTS. ALL RIGHTS RESERVED.
+        </div>
+    </div>
+
+    <script>
+        /**
+         * ලොගින් එක සිදුවන ආකාරය පාලනය කරන Function එක
+         * මෙහිදී ඉතාමත් ලස්සනට Animation එකක් සමඟ ප්‍රතිචාර දක්වයි.
+         */
+        function handleLogin() {
+            const user = document.getElementById('user').value;
+            const btn = document.querySelector('.btn-submit');
+            
+            if (!user) {
+                // Input එක හිස් නම් ලස්සන Shake Animation එකක් ලබා දීම
+                const card = document.querySelector('.auth-card');
+                card.style.animation = 'none';
+                card.offsetHeight; // trigger reflow
+                card.style.animation = 'shake 0.5s';
+                return;
+            }
+
+            // බටන් එක 'Processing' තත්වයට පත් කිරීම
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> VERIFYING...';
+            btn.style.opacity = '0.7';
+            btn.style.pointerEvents = 'none';
+
+            // ඇත්තටම සර්වර් එකකට යනවා වැනි හැඟීමක් ලබා දීම (Delay)
+            setTimeout(() => {
+                btn.innerHTML = '<i class="fa-solid fa-check"></i> ACCESS GRANTED';
+                btn.style.background = 'linear-gradient(135deg, #22c55e, #16a34a)';
+                
+                setTimeout(() => {
+                    alert("Welcome back, Administrator.");
+                    location.reload();
+                }, 1000);
+            }, 2000);
+        }
+    </script>
+
+    <style>
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            20%, 60% { transform: translateX(-10px); }
+            40%, 80% { transform: translateX(10px); }
+        }
+    </style>
+</body>
+</html>
