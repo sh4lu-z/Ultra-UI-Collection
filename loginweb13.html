@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CYBER-STRIKE | SH4LU_Z OPERATIONAL INTERFACE</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Rajdhani:wght@300;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* ==========================================================================
+           2. GLOBAL CSS VARIABLES (THE CYBER-PALETTE)
+           ==========================================================================
+        */
+        :root {
+            --hacker-green: #00ff41; /* ප්‍රධාන හැකර් කොළ පැහැය */
+            --warning-red: #ff3e3e;
+            --cyber-blue: #00d2ff;
+            --bg-black: #020202;
+            --panel-bg: rgba(0, 20, 0, 0.85);
+            --border-glow: 0 0 10px rgba(0, 255, 65, 0.3);
+            --font-mono: 'Space Mono', monospace;
+            --font-cyber: 'Rajdhani', sans-serif;
+            --scanline-color: rgba(0, 255, 65, 0.05);
+        }
+
+        /* ==========================================================================
+           3. BASE STYLES & SCANLINE EFFECT
+           ==========================================================================
+        */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-black);
+            color: var(--hacker-green);
+            font-family: var(--font-cyber);
+            height: 100vh;
+            overflow: hidden;
+            position: relative;
+        }
+
+        /* තිරය හරහා යන Scanning Lines (Old Monitor look) */
+        body::before {
+            content: " ";
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(var(--scanline-color) 50%, transparent 50%);
+            background-size: 100% 4px;
+            z-index: 100;
+            pointer-events: none;
+            animation: scan 10s linear infinite;
+        }
+
+        @keyframes scan { from { background-position: 0 0; } to { background-position: 0 100%; } }
+
+        /* ==========================================================================
+           4. MAIN DASHBOARD GRID LAYOUT
+           ==========================================================================
+        */
+        .dashboard {
+            display: grid;
+            grid-template-columns: 320px 1fr 320px;
+            grid-template-rows: 80px 1fr 60px;
+            gap: 15px;
+            height: 100vh;
+            padding: 15px;
+            z-index: 10;
+            position: relative;
+        }
+
+        @media (max-width: 1200px) {
+            .dashboard { grid-template-columns: 1fr 1fr; }
+            .right-sidebar { display: none; }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard { grid-template-columns: 1fr; }
+            .left-sidebar { display: none; }
+        }
+
+        /* පොදු Panel සැකසුම */
+        .cyber-panel {
+            background: var(--panel-bg);
+            border: 1px solid rgba(0, 255, 65, 0.2);
+            box-shadow: var(--border-glow);
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* කොන් හතරට කැපීම් දැමීම */
+        .cyber-panel::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; width: 10px; height: 10px;
+            border-top: 2px solid var(--hacker-green);
+            border-left: 2px solid var(--hacker-green);
+        }
+
+        /* ==========================================================================
+           5. HEADER AREA (SYSTEM STATUS)
+           ==========================================================================
+        */
+        .header {
+            grid-column: span 3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .system-id { font-size: 1.5rem; font-weight: 700; letter-spacing: 5px; }
+        .system-id span { color: var(--warning-red); }
+
+        .live-status {
+            display: flex;
+            gap: 30px;
+            font-size: 0.8rem;
+            text-transform: uppercase;
+        }
+
+        .status-node span { color: white; }
+
+        /* ==========================================================================
+           6. LEFT SIDEBAR: HARDWARE & TOOLS
+           ඔයාගේ Droid-Venom සහ Kali මෙවලම්.
+           ==========================================================================
+        */
+        .left-sidebar { display: flex; flex-direction: column; gap: 15px; }
+
+        .tool-card {
+            background: rgba(255, 255, 255, 0.02);
+            padding: 15px;
+            border-left: 3px solid var(--hacker-green);
+            margin-bottom: 10px;
+        }
+
+        .tool-card h4 { font-size: 0.9rem; margin-bottom: 5px; color: var(--cyber-blue); }
+
+        /* Progress Bars */
+        .progress-cont { height: 5px; background: #111; margin-top: 8px; border-radius: 10px; overflow: hidden; }
+        .progress-val { height: 100%; background: var(--hacker-green); width: 0%; transition: width 1s; }
+
+        /* ==========================================================================
+           7. CENTER: MAIN TERMINAL & LOGIN
+           ==========================================================================
+        */
+        .center-stage {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+        .terminal-display {
+            flex-grow: 1;
+            background: #000;
+            padding: 25px;
+            font-family: var(--font-mono);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: rgba(0, 255, 65, 0.7);
+            border: 1px dashed var(--hacker-green);
+            overflow-y: auto;
+        }
+
+        .login-box {
+            height: 250px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .input-group { width: 100%; }
+        .input-group input {
+            width: 100%;
+            padding: 15px;
+            background: #000;
+            border: 1px solid var(--hacker-green);
+            color: var(--hacker-green);
+            font-family: var(--font-mono);
+            outline: none;
+            margin-bottom: 15px;
+        }
+
+        .cyber-btn {
+            width: 100%;
+            padding: 15px;
+            background: var(--hacker-green);
+            color: #000;
+            border: none;
+            font-weight: 700;
+            cursor: pointer;
+            text-transform: uppercase;
+            transition: 0.3s;
+        }
+
+        .cyber-btn:hover {
+            box-shadow: 0 0 20px var(--hacker-green);
+            letter-spacing: 2px;
+        }
+
+        /* ==========================================================================
+           8. RIGHT SIDEBAR: BOT & NEWS FEED
+           NEWS.LK සහ WhatsApp Bot විස්තර.
+           ==========================================================================
+        */
+        .right-sidebar { display: flex; flex-direction: column; gap: 15px; }
+
+        .news-feed {
+            flex-grow: 1;
+            font-size: 0.75rem;
+            color: var(--text-dim);
+        }
+
+        .news-item {
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(0, 255, 65, 0.1);
+        }
+
+        .news-item time { color: var(--hacker-green); margin-right: 5px; }
+
+        /* ==========================================================================
+           9. FOOTER: LOCATION & COPYRIGHT
+           ==========================================================================
+        */
+        .footer {
+            grid-column: span 3;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.7rem;
+            border-top: 1px solid rgba(0, 255, 65, 0.2);
+            padding-top: 10px;
+        }
+
+        .blink { animation: blinker 1s linear infinite; }
+        @keyframes blinker { 50% { opacity: 0; } }
+
+    </style>
+</head>
+<body>
+
+    <div class="dashboard">
+        
+        <header class="cyber-panel header">
+            <div class="system-id">SH4LU<span>_Z</span> // GATEWAY</div>
+            <div class="live-status">
+                <div class="status-node">PROXY: <span>ENCRYPTED</span></div>
+                <div class="status-node">UPTIME: <span>104:12:05</span></div>
+                <div class="status-node">LATENCY: <span id="ping">24ms</span></div>
+            </div>
+        </header>
+
+        <aside class="cyber-panel left-sidebar">
+            <h4 style="margin-bottom: 15px;"><i class="fa-solid fa-microchip"></i> RESOURCE HUB</h4>
+            
+            <div class="tool-card">
+                <h4>DROID-VENOM MODULE</h4>
+                <div style="font-size: 0.7rem;">Injecting toolsets into Termux environment...</div>
+                <div class="progress-cont"><div class="progress-val" id="bar1" style="width: 85%;"></div></div>
+            </div>
+
+            <div class="tool-card">
+                <h4>MSFVENOM ENGINE</h4>
+                <div style="font-size: 0.7rem;">APK Payload Generation: Active</div>
+                <div class="progress-cont"><div class="progress-val" id="bar2" style="width: 42%;"></div></div>
+            </div>
+
+            <div class="tool-card">
+                <h4>METASPLOIT DB</h4>
+                <div style="font-size: 0.7rem;">Exploit Database: 4,201 loaded</div>
+                <div class="progress-cont"><div class="progress-val" id="bar3" style="width: 100%;"></div></div>
+            </div>
+
+            <div style="margin-top: auto; padding: 15px; background: rgba(0,255,65,0.05); border: 1px solid var(--hacker-green);">
+                <div style="font-size: 0.8rem; font-weight: 700;"><i class="fa-solid fa-location-dot"></i> ORIGIN: TANGALLE, LK</div>
+                <div style="font-size: 0.6rem; margin-top: 5px;">COORDS: 6.0244° N, 80.7941° E</div>
+            </div>
+        </aside>
+
+        <main class="center-stage">
+            <div class="terminal-display" id="term-out">
+                <div>[SYSTEM] Initializing SH4LU_Z Operational Interface...</div>
+                <div>[SYSTEM] Checking security handshakes... OK</div>
+                <div>[NETWORK] Connecting to BAILEYS_MD WhatsApp Server...</div>
+                <div>[JARVIS] Voice recognition core: STANDBY</div>
+                <div>[AUTH] Waiting for Operator Identification...</div>
+            </div>
+
+            <div class="cyber-panel login-box">
+                <div style="flex: 1;">
+                    <h3 style="margin-bottom: 15px;">AUTHORIZATION Required</h3>
+                    <div class="input-group">
+                        <input type="text" id="op-id" placeholder="OPERATOR_UUID">
+                        <input type="password" placeholder="MASTER_PASSPHRASE">
+                        <button class="cyber-btn" onclick="startAuth()">Login to Terminal</button>
+                    </div>
+                </div>
+                <div style="width: 150px; text-align: center; border-left: 1px solid rgba(0,255,65,0.2);">
+                    <i class="fa-solid fa-fingerprint" style="font-size: 4rem; margin-bottom: 10px; color: var(--warning-red);"></i>
+                    <div style="font-size: 0.6rem;">BIOMETRIC BYPASS REQ.</div>
+                </div>
+            </div>
+        </main>
+
+        <aside class="cyber-panel right-sidebar">
+            <h4><i class="fa-solid fa-rss"></i> NEWS.LK SUMMARY</h4>
+            <div class="news-feed" id="news-box">
+                <div class="news-item"><time>[12:04]</time> Tech sector growth in Sri Lanka sees 12% rise.</div>
+                <div class="news-item"><time>[11:45]</time> New cybersecurity policy updates for 2026.</div>
+                <div class="news-item"><time>[10:30]</time> AI models becoming standard in local app dev.</div>
+            </div>
+
+            <h4 style="margin-top: 20px;"><i class="fa-brands fa-whatsapp"></i> BOT STATUS</h4>
+            <div style="background: #000; padding: 15px; border: 1px solid rgba(0,255,65,0.2);">
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem;">
+                    <span>SESSIONS</span> <span style="color: white;">04 ACTIVE</span>
+                </div>
+                <div style="display: flex; justify-content: space-between; font-size: 0.8rem; margin-top: 5px;">
+                    <span>PLUGINS</span> <span style="color: white;">28 LOADED</span>
+                </div>
+                <div style="margin-top: 15px; text-align: center;">
+                    <span class="blink" style="color: #22c55e;">● BAILEYS_ENGINE: STABLE</span>
+                </div>
+            </div>
+        </aside>
+
+        <footer class="cyber-panel footer">
+            <div>&copy; 2026 SH4LU_Z ECOSYSTEM // ALL RIGHTS RESERVED</div>
+            <div>STATION: <span>BATT_PC_STABLE</span> | BUILD: <span>13.0.4-HX</span></div>
+            <div style="color: var(--warning-red);">WARNING: AUTHORIZED ACCESS ONLY</div>
+        </footer>
+
+    </div>
+
+    <script>
+        // 1. Terminal Typing Effect (සැබෑ පද්ධතියක් මෙන් අකුරු වැටීම)
+        const termOut = document.getElementById('term-out');
+        const newsBox = document.getElementById('news-box');
+
+        function typeLog(msg) {
+            const div = document.createElement('div');
+            div.innerHTML = `<span style="color: #fff;">></span> ${msg}`;
+            termOut.appendChild(div);
+            termOut.scrollTop = termOut.scrollHeight;
+        }
+
+        // වරින් වර වැටෙන ලොග් පණිවිඩ
+        setInterval(() => {
+            const logs = [
+                "Bypassing internal firewall node 192.168.1.1...",
+                "Scanning Droid-Venom plugin directory...",
+                "Encrypted data packet received from Tangalle server.",
+                "Optimizing JARVIS memory cache...",
+                "WhatsApp MD session heartbeat detected.",
+                "News.lk data updated. HTML content cleaned."
+            ];
+            typeLog(logs[Math.floor(Math.random() * logs.length)]);
+        }, 3000);
+
+        // 2. Resource Bar Updates (සජීවීව බාර් වෙනස් වීම)
+        setInterval(() => {
+            document.getElementById('bar1').style.width = Math.floor(Math.random() * (95 - 70) + 70) + "%";
+            document.getElementById('bar2').style.width = Math.floor(Math.random() * (60 - 30) + 30) + "%";
+            document.getElementById('ping').innerText = Math.floor(Math.random() * (50 - 15) + 15) + "ms";
+        }, 2000);
+
+        // 3. Login Simulation
+        function startAuth() {
+            const id = document.getElementById('op-id').value;
+            if(!id) return alert("ENTER OPERATOR ID!");
+
+            typeLog("AUTH_REQUEST: Initializing operator handshake...");
+            
+            setTimeout(() => {
+                typeLog("SYNC: Operator " + id.toUpperCase() + " verified.");
+                typeLog("WELCOME: Master Sh4lu_Z. System control is yours.");
+                alert("ACCESS GRANTED: Welcome to the Core, Master.");
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
