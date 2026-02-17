@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>USB Security Research Labs | Sh4lu_z</title>
+    <style>
+     
+        :root {
+            --primary: #4fa3d1;
+            --bg: #1a1a1a;     
+            --card-bg: #2d2d2d; 
+            --text: #e0e0e0;  
+            --text-secondary: #a0a0a0;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+            border-bottom: 1px solid #444;
+            padding-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            color: #ffffff;
+            margin: 0;
+            font-weight: 600;
+        }
+
+        p.subtitle {
+            font-size: 1rem;
+            color: var(--primary);
+            margin-top: 5px;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        /* කාඩ් නිර්මාණය - චාම් විදිහට */
+        .card {
+            background: var(--card-bg);
+            border: 1px solid #444;
+            padding: 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            color: inherit;
+            transition: transform 0.2s, border-color 0.2s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card:hover {
+            border-color: var(--primary);
+            transform: translateY(-3px); 
+            background: #333;
+        }
+        
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .part-num {
+            font-size: 0.9rem;
+            background: #444;
+            padding: 2px 8px;
+            border-radius: 4px;
+            color: #fff;
+        }
+
+        .card-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .card-desc {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+        }
+
+        .special-card {
+            border-left: 4px solid var(--primary);
+        }
+
+        footer {
+            text-align: center;
+            margin-top: 60px;
+            color: #666;
+            font-size: 0.9rem;
+            border-top: 1px solid #333;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>USB Security Research Labs</h1>
+            <p class="subtitle">Project Lead: Sh4lu_z</p>
+        </header>
+
+        <div class="grid">
+            <a href="loginweb1.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 01</span>
+                </div>
+                <span class="card-title">The Foundation</span>
+                <span class="card-desc">Understanding HID attacks and why computers trust USB devices blindly.</span>
+            </a>
+
+            <a href="loginweb2.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 02</span>
+                </div>
+                <span class="card-title">Hardware Architecture</span>
+                <span class="card-desc">Deep dive into Microcontrollers, ATtiny85, and spoofing VID/PID.</span>
+            </a>
+
+            <a href="loginweb3.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 03</span>
+                </div>
+                <span class="card-title">High Voltage Physics</span>
+                <span class="card-desc">How USB Killers work: 200V surges and circuit destruction analysis.</span>
+            </a>
+
+            <a href="loginweb4.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 04</span>
+                </div>
+                <span class="card-title">The Safe Lab</span>
+                <span class="card-desc">Setting up Virtual Machines, Isolation, and "Sacrificial Lambs".</span>
+            </a>
+
+            <a href="loginweb5.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 05</span>
+                </div>
+                <span class="card-title">Digispark Engineering</span>
+                <span class="card-desc">Building your first BadUSB for $2. Driver setup and "Hello World".</span>
+            </a>
+
+            <a href="loginweb6.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 06</span>
+                </div>
+                <span class="card-title">Data Exfiltration</span>
+                <span class="card-desc">Stealing WiFi passwords using PowerShell and Webhooks.</span>
+            </a>
+
+            <a href="loginweb7.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 07</span>
+                </div>
+                <span class="card-title">Ghost Protocol</span>
+                <span class="card-desc">Bypassing Windows Defender using Obfuscation and Base64 encoding.</span>
+            </a>
+
+            <a href="loginweb8.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 08</span>
+                </div>
+                <span class="card-title">Pranks & Automation</span>
+                <span class="card-desc">Fake updates, Mouse Jigglers, and rapid software installation scripts.</span>
+            </a>
+
+            <a href="loginweb9.html" class="card">
+                <div class="card-header">
+                    <span class="part-num">Part 09</span>
+                </div>
+                <span class="card-title">Android Weaponry</span>
+                <span class="card-desc">Turning rooted phones into BadUSB devices using Kali Nethunter.</span>
+            </a>
+
+            <a href="loginweb10.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb11.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb12.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb13.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb14.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb15.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb16.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb17.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb18.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb19.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb20.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb21.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          <a href="loginweb22.html" class="card special-card">
+                <div class="card-header">
+                    <span class="part-num" style="background-color: var(--primary);">Part 10</span>
+                </div>
+                <span class="card-title">Final Defense & Cert</span>
+                <span class="card-desc">Prevention strategies, Legal ethics, and the Final Seal by Sh4lu_z.</span>
+            </a>
+          
+        </div>
+
+        <footer>
+            <p>&copy; Ultra-UI-Collection | by sh4lu-z</p>
+        </footer>
+    </div>
+</body>
+</html>
